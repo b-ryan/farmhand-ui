@@ -18,6 +18,17 @@ right from the UI.
 
 ## Installation
 
-### Standalone
+Download the latest release
+[here](https://github.com/b-ryan/farmhand-ui/releases/download/0.1.1/farmhand-ui-0.1.1-standalone.jar).
 
-### Embedded
+## Usage
+
+Once you have downloaded the latest jar, run it with
+
+```
+java jar farmhand-ui-0.1.1-standalone.jar
+```
+
+## Screenshot
+
+![Screenshot](https://github.com/b-ryan/farmhand-ui/raw/master/preview.png)
