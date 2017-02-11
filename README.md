@@ -11,8 +11,8 @@ right from the UI.
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Installation](#installation)
-  - [Standalone](#standalone)
-  - [Embedded](#embedded)
+- [Usage](#usage)
+- [Screenshot](#screenshot)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
