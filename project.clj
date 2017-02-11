@@ -3,9 +3,9 @@
   :url "https://github.com/b-ryan/farmhand-ui"
   :deploy-repositories [["releases" :clojars]
                         ["snapshots" :clojars]]
-  :dependencies [[com.buckryan/farmhand "0.4.0-SNAPSHOT"]
+  :dependencies [[com.buckryan/farmhand "0.4.0"]
                  [compojure "1.5.1"]
-                 [org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojure "1.7.0"]
                  [org.clojure/tools.logging "0.3.1"]
                  [org.clojure/tools.nrepl "0.2.12"]
                  [prone "1.1.4"]
