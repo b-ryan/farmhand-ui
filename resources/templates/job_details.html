@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-xs-2"><strong>Job ID</strong></div>
+  <div class="col-xs-10">{{ job.job-id }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-2"><strong>Queue</strong></div>
+  <div class="col-xs-10">{{ job.queue }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-2"><strong>Function</strong></div>
+  <div class="col-xs-10">{{ job.fn-path }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-2"><strong>Arguments</strong></div>
+  <div class="col-xs-10">{{ job.args|json }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-2"><strong>Status</strong></div>
+  <div class="col-xs-10">{{ job.status }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-2"><strong>Created</strong></div>
+  <div class="col-xs-10">{{ job.created-at|date:"yyyy-MM-dd HH:mm:ss z" }}</div>
+</div>
+{% ifequal job.status "complete" %}
+<div class="row">
+  <div class="col-xs-2"><strong>Completed</strong></div>
+  <div class="col-xs-10">{{ job.completed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</div>
+</div>
+{% endifequal %}
+{% ifequal job.status "failed" %}
+<div class="row">
+  <div class="col-xs-2"><strong>Last Failure</strong></div>
+  <div class="col-xs-10">{{ job.failed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</div>
+</div>
+<div class="row">
+  <div class="col-xs-2"><strong>Failure Reason</strong></div>
+  <div class="col-xs-10">{{ job.reason }}</div>
+</div>
+<form action="/jobs/{{ job.job-id }}/requeue" method="post">
+  <button>Requeue</button>
+</form>
+{% endifequal %}
+
+{% endblock %}

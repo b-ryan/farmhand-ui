@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Failed Jobs</h1>
+    {% if prev-page %}<a href="/failed?page={{ prev-page }}">Prev</a>{% endif %}
+    {% if next-page %}<a href="/failed?page={{ next-page }}">Next</a>{% endif %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Queue</th>
+        <th>Function</th>
+        <th>Failure Time</th>
+        <th>Actions</th>
+      </tr>
+      {% for item in items %}
+      <tr>
+        <td><a href="/jobs/{{ job.job-id}}">
+            {{ item.job.job-id }}</a></td>
+        <td>{{ item.job.queue }}</td>
+        <td>{{ item.job.fn-path }}</td>
+        <td>{{ item.job.failed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
+        <td>
+          <form action="/jobs/{{ job.job-id }}/requeue" method="post">
+            <button>Requeue</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}
