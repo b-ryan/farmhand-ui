@@ -7,7 +7,6 @@
             [farmhand.utils :refer [fatal?]]
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
-            [ring.middleware.reload :refer [wrap-reload]]
             [ring.middleware.resource :refer [wrap-resource]]
             [selmer.middleware :refer [wrap-error-page]]))
 
@@ -31,7 +30,6 @@
 (defn- wrap-dev
   [handler]
   (-> handler
-      wrap-reload
       wrap-error-page
       wrap-exceptions))
 
