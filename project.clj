@@ -1,6 +1,8 @@
 (defproject com.buckryan/farmhand-ui "0.1.0-SNAPSHOT"
   :description "Farmhand web interface"
   :url "https://github.com/b-ryan/farmhand-ui"
+  :deploy-repositories [["releases" :clojars]
+                        ["snapshots" :clojars]]
   :dependencies [[com.buckryan/farmhand "0.4.0-SNAPSHOT"]
                  [compojure "1.5.1"]
                  [org.clojure/clojure "1.8.0"]
