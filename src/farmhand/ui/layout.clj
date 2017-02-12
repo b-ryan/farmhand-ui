@@ -1,11 +1,18 @@
 (ns farmhand.ui.layout
-  (:require [ring.util.response :refer [content-type]]
+  (:require [farmhand.utils :refer [parse-long]]
+            [ring.util.response :refer [content-type]]
             [selmer.filters :as filters]
             [selmer.parser :as parser]))
 
 (declare ^:dynamic *app-context*)
 (parser/set-resource-path! (clojure.java.io/resource "templates"))
 (parser/cache-off!)
+
+(filters/add-filter!
+  :subs
+  (fn
+    ([s start] (subs s (parse-long start)))
+    ([s start end] (subs s (parse-long start) (parse-long end)))))
 
 (defn render
   "renders the HTML template located relative to resources/templates"

@@ -22,4 +22,4 @@
 
 (defn nrepl-bind
   []
-  (merge* ["FARMHAND_UI_NREPL_BIND"] [:ui :nrepl-bind] "localhost"))
+  (merge* ["FARMHAND_UI_NREPL_BIND"] [:ui :nrepl-bind] "127.0.0.1"))

@@ -14,8 +14,11 @@
       </tr>
       {% for item in items %}
       <tr>
-        <td><a href="/jobs/{{ item.job.job-id}}">
-            {{ item.job.job-id }}</a></td>
+        <td>
+          <a href="/jobs/{{ job.job-id}}">
+            <span title="{{ item.job.job-id }}">{{ item.job.job-id|subs:0:6 }}...</span>
+          </a>
+        </td>
         <td>{{ item.job.queue }}</td>
         <td>{{ item.job.fn-path }}</td>
         <td>{{ item.job.created-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
