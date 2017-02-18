@@ -15,7 +15,7 @@
       {% for item in items %}
       <tr>
         <td>
-          <a href="/jobs/{{ job.job-id}}">
+          <a href="/jobs/{{ item.job.job-id}}">
             <span title="{{ item.job.job-id }}">{{ item.job.job-id|subs:0:6 }}...</span>
           </a>
         </td>

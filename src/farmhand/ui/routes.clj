@@ -6,7 +6,8 @@
             [farmhand.jobs :as jobs]
             [farmhand.queue :as queue]
             [farmhand.registry :as registry]
-            [farmhand.ui.layout :as layout :refer [error-page]]))
+            [farmhand.ui.layout :as layout :refer [error-page]]
+            [ring.util.anti-forgery :refer [anti-forgery-field]]))
 
 (def ^:private ^Integer page-size 25)
 
@@ -21,9 +22,10 @@
   (layout/render
     template
     (let [page (as-int (get-in request [:query-params "page"]))]
-      (registry/page redis-key
-                     (:farmhand-pool request)
-                     {:page page}))))
+      (assoc (registry/page redis-key
+                            (:farmhand-pool request)
+                            {:page page})
+             :anti-forgery-field (anti-forgery-field)))))
 
 (defroutes routes
   (GET "/" [] (found "/failed"))

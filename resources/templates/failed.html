@@ -16,7 +16,7 @@
       {% for item in items %}
       <tr>
         <td>
-          <a href="/jobs/{{ job.job-id}}">
+          <a href="/jobs/{{ item.job.job-id}}">
             <span title="{{ item.job.job-id }}">{{ item.job.job-id|subs:0:6 }}...</span>
           </a>
         </td>
@@ -24,7 +24,8 @@
         <td>{{ item.job.fn-path }}</td>
         <td>{{ item.job.failed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
         <td>
-          <form action="/jobs/{{ job.job-id }}/requeue" method="post">
+          <form action="/jobs/{{ item.job.job-id }}/requeue" method="post">
+            {{ anti-forgery-field|safe }}
             <button class="btn btn-sm">Requeue</button>
           </form>
         </td>
