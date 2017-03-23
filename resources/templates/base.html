@@ -5,43 +5,30 @@
     <META name="viewport" content="width=device-width, initial-scale=1">
     <title>Farmhand</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
     {% style "/css/screen.css" %}
   </head>
   <body>
-      <!-- navbar -->
-      <nav class="navbar navbar-dark bg-primary" role="navigation">
-          <button class="navbar-toggler hidden-sm-up"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#collapsing-navbar">
-              &#9776;
-          </button>
-          <div class="collapse navbar-toggleable-xs" id="collapsing-navbar">
-              <a class="navbar-brand" href="/">Farmhand</a>
-              <ul class="nav navbar-nav">
-                  <li class="nav-item">
-                      <a href="/in-flight"
-                         class="nav-link{% ifequal page "in_flight.html" %} active{%endifequal%}">
-                        In Flight
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="/completed"
-                         class="nav-link{% ifequal page "completed.html" %} active{%endifequal%}">
-                        Completed
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="/failed"
-                         class="nav-link{% ifequal page "failed.html" %} active{%endifequal%}">
-                        Failed
-                      </a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse" role="navigation">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="/">Farmhand</a>
+      <div class="collapse navbar-collapse" id="collapsing-navbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item {% ifequal page "in_flight.html" %}active{%endifequal%}">
+            <a href="/in-flight" class="nav-link">In Flight</a>
+          </li>
+          <li class="nav-item {% ifequal page "completed.html" %}active{%endifequal%}">
+            <a href="/completed" class="nav-link">Completed</a>
+          </li>
+          <li class="nav-item {% ifequal page "failed.html" %}active{%endifequal%}">
+            <a href="/failed" class="nav-link">Failed</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     <div class="container">
       {% block content %}
@@ -50,5 +37,8 @@
 
     {% block page-scripts %}
     {% endblock %}
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
   </body>
 </html>

@@ -3,8 +3,7 @@
 <div class="row">
   <div class="col-sm-12">
     <h1>Jobs Being Processed</h1>
-    {% if prev-page %}<a href="/in-flight?page={{ prev-page }}">Prev</a>{% endif %}
-    {% if next-page %}<a href="/in-flight?page={{ next-page }}">Next</a>{% endif %}
+    {% include "paging_nav.html" %}
     <table class="table">
       <tr>
         <th>ID</th>
@@ -25,6 +24,7 @@
       </tr>
       {% endfor %}
     </table>
+    {% include "paging_nav.html" %}
   </div>
 </div>
 {% endblock %}

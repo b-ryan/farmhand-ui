@@ -3,8 +3,7 @@
 <div class="row">
   <div class="col-sm-12">
     <h1>Completed Jobs</h1>
-    {% if prev-page %}<a href="/completed?page={{ prev-page }}">Prev</a>{% endif %}
-    {% if next-page %}<a href="/completed?page={{ next-page }}">Next</a>{% endif %}
+    {% include "paging_nav.html" %}
     <table class="table">
       <tr>
         <th>ID</th>
@@ -27,6 +26,7 @@
       </tr>
       {% endfor %}
     </table>
+    {% include "paging_nav.html" %}
   </div>
 </div>
 {% endblock %}
