@@ -17,8 +17,11 @@
       <a class="navbar-brand" href="/">Farmhand</a>
       <div class="collapse navbar-collapse" id="collapsing-navbar">
         <ul class="navbar-nav mr-auto">
+          <li class="nav-item {% ifequal page "queues.html" %}active{%endifequal%}">
+            <a href="/queues" class="nav-link">Queues</a>
+          </li>
           <li class="nav-item {% ifequal page "in_flight.html" %}active{%endifequal%}">
-            <a href="/in-flight" class="nav-link">In Flight</a>
+            <a href="/in-flight" class="nav-link">In Progress</a>
           </li>
           <li class="nav-item {% ifequal page "completed.html" %}active{%endifequal%}">
             <a href="/completed" class="nav-link">Completed</a>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+{% for queue in queues %}
+<table class="table">
+  <tr>
+    <th>Queue</th>
+    <th># Jobs Queued</th>
+  </tr>
+  <tr>
+    <td>{{ queue.name }}</td>
+    <td>{{ queue.size }}</td>
+  </tr>
+</table>
+{% endfor %}
+{% endblock %}

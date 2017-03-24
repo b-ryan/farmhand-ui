@@ -30,6 +30,11 @@
 (defroutes routes
   (GET "/" [] (found "/failed"))
 
+  (GET "/queues" request
+       (layout/render
+         "queues.html"
+         {:queues (queue/describe-queues (:farmhand-pool request))}))
+
   (GET "/in-flight" request
        (render-registry-page request "in_flight.html" (queue/in-flight-key)))
   (GET "/completed" request

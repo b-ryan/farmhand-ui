@@ -1,32 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="row">
-  <div class="col-sm-12">
-    <h1>Completed Jobs</h1>
-    {% include "paging_nav.html" %}
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Queue</th>
-        <th>Function</th>
-        <th>Created</th>
-        <th>Completed</th>
-      </tr>
-      {% for item in items %}
-      <tr>
-        <td>
-          <a href="/jobs/{{ item.job.job-id}}">
-            <span title="{{ item.job.job-id }}">{{ item.job.job-id|subs:0:6 }}...</span>
-          </a>
-        </td>
-        <td>{{ item.job.queue }}</td>
-        <td>{{ item.job.fn-path }}</td>
-        <td>{{ item.job.created-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
-        <td>{{ item.job.completed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    {% include "paging_nav.html" %}
-  </div>
-</div>
+{% include "paging_nav.html" %}
+<table class="table">
+  <tr>
+    <th>ID</th>
+    <th>Queue</th>
+    <th>Function</th>
+    <th>Created</th>
+    <th>Completed</th>
+  </tr>
+  {% for item in items %}
+  <tr>
+    <td>
+      <a href="/jobs/{{ item.job.job-id}}">
+        <span title="{{ item.job.job-id }}">{{ item.job.job-id|subs:0:6 }}...</span>
+      </a>
+    </td>
+    <td>{{ item.job.queue }}</td>
+    <td>{{ item.job.fn-path }}</td>
+    <td>{{ item.job.created-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
+    <td>{{ item.job.completed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% include "paging_nav.html" %}
 {% endblock %}
