@@ -4,11 +4,19 @@
 <table class="table">
   <tr>
     <th>Queue</th>
-    <th># Jobs Queued</th>
+    <th>Size</th>
+    <th>Actions</th>
   </tr>
   <tr>
     <td>{{ queue.name }}</td>
     <td>{{ queue.size }}</td>
+    <td>
+      <form action="/queues/{{ queue.name|urlescape }}/purge" method="post"
+            onsubmit="return confirm('Are you sure you want to delete all jobs from this queue?');">
+        {{ anti-forgery-field|safe }}
+        <button class="btn btn-sm">Purge</button>
+      </form>
+    </td>
   </tr>
 </table>
 {% endfor %}

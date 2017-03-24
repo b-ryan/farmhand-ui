@@ -39,8 +39,8 @@
   <div class="col-2"><strong>Failure Reason</strong></div>
   <div class="col-10">{{ job.reason }}</div>
 </div>
-<form action="/jobs/{{ job.job-id }}/requeue" method="post">
-  <button>Requeue</button>
-</form>
+{% with job-id=job.job-id %}
+{% include "components/requeue_form.html" %}
+{% endwith %}
 {% endifequal %}
 {% endblock %}

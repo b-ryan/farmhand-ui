@@ -33,20 +33,26 @@
   (GET "/queues" request
        (layout/render
          "queues.html"
-         {:queues (queue/describe-queues (:farmhand-pool request))}))
+         {:queues (queue/describe-queues (:farmhand-pool request))
+          :anti-forgery-field (anti-forgery-field)}))
+
+  (POST "/queues/:queue-name/purge" [queue-name :as request]
+        (queue/purge (:farmhand-pool request) queue-name)
+        (found "/queues"))
 
   (GET "/in-flight" request
-       (render-registry-page request "in_flight.html" (queue/in-flight-key)))
+       (render-registry-page request "registries/in_flight.html" (queue/in-flight-key)))
   (GET "/completed" request
-       (render-registry-page request "completed.html" (queue/completed-key)))
+       (render-registry-page request "registries/completed.html" (queue/completed-key)))
   (GET "/failed" request
-       (render-registry-page request "failed.html" (dead-letters/dead-letter-key)))
+       (render-registry-page request "registries/failed.html" (dead-letters/dead-letter-key)))
 
   (GET "/jobs/:job-id" [job-id :as request]
        (let [job (jobs/fetch-body job-id (:farmhand-pool request))]
          (layout/render
            "job_details.html"
-           {:job job})))
+           {:job job
+            :anti-forgery-field (anti-forgery-field)})))
 
   (POST "/jobs/:job-id/requeue" [job-id :as request]
         (dead-letters/requeue job-id (:farmhand-pool request))

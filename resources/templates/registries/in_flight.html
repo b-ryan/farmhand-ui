@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-{% include "paging_nav.html" %}
+{% include "components/paging_nav.html" %}
 <table class="table">
   <tr>
     <th>ID</th>
     <th>Queue</th>
     <th>Function</th>
-    <th>Failure Time</th>
-    <th>Actions</th>
+    <th>Created</th>
   </tr>
   {% for item in items %}
   <tr>
@@ -18,15 +17,9 @@
     </td>
     <td>{{ item.job.queue }}</td>
     <td>{{ item.job.fn-path }}</td>
-    <td>{{ item.job.failed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
-    <td>
-      <form action="/jobs/{{ item.job.job-id }}/requeue" method="post">
-        {{ anti-forgery-field|safe }}
-        <button class="btn btn-sm">Requeue</button>
-      </form>
-    </td>
+    <td>{{ item.job.created-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
   </tr>
   {% endfor %}
 </table>
-{% include "paging_nav.html" %}
+{% include "components/paging_nav.html" %}
 {% endblock %}

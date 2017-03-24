@@ -8,6 +8,12 @@
 (parser/set-resource-path! (clojure.java.io/resource "templates"))
 (parser/cache-off!)
 
+(defn missing-value-fn
+  [tag context-map]
+  (throw (ex-info "tag is missing" {:tag tag})))
+
+(selmer.util/set-missing-value-formatter! missing-value-fn :filter-missing-values true)
+
 (filters/add-filter!
   :subs
   (fn

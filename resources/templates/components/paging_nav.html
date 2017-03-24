@@ -1,0 +1,6 @@
+<nav class="nav justify-content-end">
+  <a class="nav-link {% if not prev-page %}disabled{% endif %}"
+    href="/failed?page={{ prev-page|default:"" }}">Prev</a>
+  <a class="nav-link {% if not next-page %}disabled{% endif %}"
+    href="/failed?page={{ next-page|default:"" }}">Next</a>
+</nav>
