@@ -28,7 +28,7 @@
              :anti-forgery-field (anti-forgery-field)))))
 
 (defroutes routes
-  (GET "/" [] (found "/failed"))
+  (GET "/" [] (found "/queues"))
 
   (GET "/queues" request
        (layout/render
