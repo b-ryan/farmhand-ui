@@ -8,7 +8,7 @@
 (parser/set-resource-path! (clojure.java.io/resource "templates"))
 (parser/cache-off!)
 
-(defn missing-value-fn
+(defn- missing-value-fn
   [tag context-map]
   (throw (ex-info "tag is missing" {:tag tag})))
 

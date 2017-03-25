@@ -1,5 +1,17 @@
 # Change Log
 
+## 0.2.0
+
+- New `/queues` route to show list of queues, their sizes, and give a button to
+  purge each queue
+- `/` route now redirects to `/queues` instead of `/failed`
+- Upgraded bootstrap to 4.0.0-alpha.6
+- Restyled to use darker navbar
+- Reorganized templates directory
+- Prev/Next links in registry pages are now prettier (uses a Bootstrap nav),
+  the code is DRYed up using Selmer imports, and the links now also appear at
+  the bottom of the pages.
+
 ## 0.1.2
 
 - Truncate job IDs in each of the pages. This saves some screen real estate.
