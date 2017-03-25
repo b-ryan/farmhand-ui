@@ -19,14 +19,14 @@ right from the UI.
 ## Installation
 
 Download the latest release
-[here](https://github.com/b-ryan/farmhand-ui/releases/download/0.1.2/farmhand-ui-0.1.2-standalone.jar).
+[here](https://github.com/b-ryan/farmhand-ui/releases/download/0.2.0/farmhand-ui-0.2.0-standalone.jar).
 
 ## Usage
 
 Once you have downloaded the latest jar, run it with
 
 ```
-java jar farmhand-ui-0.1.2-standalone.jar
+java jar farmhand-ui-0.2.0-standalone.jar
 ```
 
 ## Screenshot
