@@ -1,6 +1,6 @@
 (ns farmhand.ui.handler
   (:require [clojure.tools.logging :as log]
-            [farmhand.redis :as redis]
+            [farmhand.core :as farmhand]
             [farmhand.ui.config :as config]
             [farmhand.ui.layout :refer [error-page]]
             [farmhand.ui.routes :refer [routes]]
@@ -22,10 +22,10 @@
                      :title "An unexpected error occurred."
                      :message "Please see logs for details."})))))
 
-(defn- wrap-pool
-  [handler pool]
+(defn- wrap-farmhand-context
+  [handler context]
   (fn [request]
-    (handler (assoc request :farmhand-pool pool))))
+    (handler (assoc request :farmhand.ui/context context))))
 
 (defn- wrap-dev
   [handler]
@@ -34,17 +34,15 @@
       wrap-exceptions))
 
 (defn- wrap-base
-  [handler pool]
+  [handler context]
   (-> handler
       (wrap-defaults site-defaults)
       (wrap-dev)
       (wrap-resource "public")
       (wrap-internal-error)
-      (wrap-pool pool)))
+      (wrap-farmhand-context context)))
 
 (defn app
-  ([]
-   (app {}))
-  ([{:keys [redis pool]}]
-   (let [pool (or pool (redis/create-pool (config/redis redis)))]
-     (wrap-base #'routes pool))))
+  ([] (app (farmhand/create-context)))
+  ([context]
+   (wrap-base #'routes context)))

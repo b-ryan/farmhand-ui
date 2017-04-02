@@ -2,7 +2,6 @@
   (:require [compojure.coercions :refer [as-int]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :as route]
-            [farmhand.dead-letters :as dead-letters]
             [farmhand.jobs :as jobs]
             [farmhand.queue :as queue]
             [farmhand.registry :as registry]
@@ -22,8 +21,8 @@
   (layout/render
     template
     (let [page (as-int (get-in request [:query-params "page"]))]
-      (assoc (registry/page redis-key
-                            (:farmhand-pool request)
+      (assoc (registry/page (:farmhand.ui/context request)
+                            redis-key
                             {:page page})
              :anti-forgery-field (anti-forgery-field)))))
 
@@ -33,29 +32,34 @@
   (GET "/queues" request
        (layout/render
          "queues.html"
-         {:queues (queue/describe-queues (:farmhand-pool request))
+         {:queues (queue/describe-queues (:farmhand.ui/context request))
           :anti-forgery-field (anti-forgery-field)}))
 
   (POST "/queues/:queue-name/purge" [queue-name :as request]
-        (queue/purge (:farmhand-pool request) queue-name)
+        (queue/purge (:farmhand.ui/context request) queue-name)
         (found "/queues"))
 
   (GET "/in-flight" request
-       (render-registry-page request "registries/in_flight.html" (queue/in-flight-key)))
+       (render-registry-page request "registries/in_flight.html"
+                             (queue/in-flight-key (:farmhand.ui/context request))))
+
   (GET "/completed" request
-       (render-registry-page request "registries/completed.html" (queue/completed-key)))
+       (render-registry-page request "registries/completed.html"
+                             (queue/completed-key (:farmhand.ui/context request))))
+
   (GET "/failed" request
-       (render-registry-page request "registries/failed.html" (dead-letters/dead-letter-key)))
+       (render-registry-page request "registries/failed.html"
+                             (queue/dead-letter-key (:farmhand.ui/context request))))
 
   (GET "/jobs/:job-id" [job-id :as request]
-       (let [job (jobs/fetch-body job-id (:farmhand-pool request))]
+       (let [job (jobs/fetch-body job-id (:farmhand.ui/context request))]
          (layout/render
            "job_details.html"
            {:job job
             :anti-forgery-field (anti-forgery-field)})))
 
   (POST "/jobs/:job-id/requeue" [job-id :as request]
-        (dead-letters/requeue job-id (:farmhand-pool request))
+        (queue/requeue job-id (:farmhand.ui/context request))
         (found (str "/jobs/" job-id)))
 
   (route/not-found
