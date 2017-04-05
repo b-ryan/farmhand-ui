@@ -3,7 +3,7 @@
   :url "https://github.com/b-ryan/farmhand-ui"
   :deploy-repositories [["releases" :clojars]
                         ["snapshots" :clojars]]
-  :dependencies [[com.buckryan/farmhand "0.8.0-SNAPSHOT"]
+  :dependencies [[com.buckryan/farmhand "0.8.0"]
                  [compojure "1.5.2"]
                  [http-kit "2.2.0"]
                  [org.clojure/clojure "1.7.0"]

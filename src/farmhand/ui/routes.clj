@@ -52,14 +52,14 @@
                              (queue/dead-letter-key (:farmhand.ui/context request))))
 
   (GET "/jobs/:job-id" [job-id :as request]
-       (let [job (jobs/fetch-body job-id (:farmhand.ui/context request))]
+       (let [job (jobs/fetch-body (:farmhand.ui/context request) job-id)]
          (layout/render
            "job_details.html"
            {:job job
             :anti-forgery-field (anti-forgery-field)})))
 
   (POST "/jobs/:job-id/requeue" [job-id :as request]
-        (queue/requeue job-id (:farmhand.ui/context request))
+        (queue/requeue (:farmhand.ui/context request) job-id)
         (found (str "/jobs/" job-id)))
 
   (route/not-found
