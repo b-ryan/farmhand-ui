@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-{% for queue in queues %}
 <table class="table">
   <tr>
     <th>Queue</th>
     <th>Size</th>
     <th>Actions</th>
   </tr>
+  {% for queue in queues %}
   <tr>
     <td>{{ queue.name }}</td>
     <td>{{ queue.size }}</td>
@@ -18,6 +18,6 @@
       </form>
     </td>
   </tr>
+  {% endfor %}
 </table>
-{% endfor %}
 {% endblock %}
