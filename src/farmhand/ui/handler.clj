@@ -43,6 +43,6 @@
       (wrap-farmhand-context context)))
 
 (defn app
-  ([] (app (farmhand/create-context)))
+  ([] (app (or @farmhand/context* (farmhand/create-context))))
   ([context]
    (wrap-base #'routes context)))
