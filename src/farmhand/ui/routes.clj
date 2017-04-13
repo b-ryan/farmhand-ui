@@ -18,7 +18,7 @@
 
 (defn- render-registry-page
   [request template redis-key]
-  (layout/render
+  (layout/render-200
     template
     (let [page (as-int (get-in request [:query-params "page"]))]
       (assoc (registry/page (:farmhand.ui/context request)
@@ -30,7 +30,7 @@
   (GET "/" [] (found "/queues"))
 
   (GET "/queues" request
-       (layout/render
+       (layout/render-200
          "queues.html"
          {:queues (queue/describe-queues (:farmhand.ui/context request))
           :anti-forgery-field (anti-forgery-field)}))
@@ -53,7 +53,7 @@
 
   (GET "/jobs/:job-id" [job-id :as request]
        (let [job (jobs/fetch-body (:farmhand.ui/context request) job-id)]
-         (layout/render
+         (layout/render-200
            "job_details.html"
            {:job job
             :anti-forgery-field (anti-forgery-field)})))

@@ -4,30 +4,42 @@
             [selmer.filters :as filters]
             [selmer.parser :as parser]))
 
-(declare ^:dynamic *app-context*)
-(parser/set-resource-path! (clojure.java.io/resource "templates"))
-(parser/cache-off!)
+;; WARNING: do not use parser/set-resource-path!
+;; Doing so will cause conflicts & errors when including this repo in another
+;; project that also sets its own selmer path
+(def custom-resource-path (clojure.java.io/resource "farmhand-ui/templates/"))
 
 (defn- missing-value-fn
   [tag context-map]
   (throw (ex-info "tag is missing" {:tag tag})))
 
+;; FIXME these should not be global settings - figure out how to not conflict
+;; with projects that use this repo as a dependency
+(parser/cache-off!)
 (selmer.util/set-missing-value-formatter! missing-value-fn :filter-missing-values true)
 
 (filters/add-filter!
-  :subs
+  :subs ;; FIXME namespace this?
   (fn
     ([s start] (subs s (parse-long start)))
     ([s start end] (subs s (parse-long start) (parse-long end)))))
 
 (defn render
-  "renders the HTML template located relative to resources/templates"
+  "A wrapper around Selmer that sets up the custom resource path."
   [template & [params]]
+  (parser/render-file
+    template
+    (assoc params :page template)
+    {:custom-resource-path custom-resource-path}))
+
+(defn render-200
+  "renders the HTML template and returns a ring 200 response.
+
+  'args' are passed directly to the render function."
+  [& args]
   {:status 200
    :headers {"Content-Type" "text/html; charset=utf-8"}
-   :body (parser/render-file
-           template
-           (assoc params :page template))})
+   :body (apply render args)})
 
 (defn error-page
   "error-details should be a map containing the following keys:
@@ -40,4 +52,4 @@
   [error-details]
   {:status  (:status error-details)
    :headers {"Content-Type" "text/html; charset=utf-8"}
-   :body    (parser/render-file "error.html" error-details)})
+   :body    (render "error.html" error-details)})

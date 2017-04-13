@@ -38,7 +38,7 @@
   (-> handler
       (wrap-defaults site-defaults)
       (wrap-dev)
-      (wrap-resource "public")
+      (wrap-resource "farmhand-ui/public")
       (wrap-internal-error)
       (wrap-farmhand-context context)))
 
