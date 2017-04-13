@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.2
+
+- Fix several issues with using the UI as a dependency to another project.
+
 ## 0.2.1
 
 - Upgraded Farmhand dependency to 0.8.0
