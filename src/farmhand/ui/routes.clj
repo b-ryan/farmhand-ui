@@ -17,12 +17,12 @@
    :body ""})
 
 (defn- render-registry-page
-  [request template redis-key]
+  [request template registry-name]
   (layout/render-200
     template
     (let [page (as-int (get-in request [:query-params "page"]))]
       (assoc (registry/page (:farmhand.ui/context request)
-                            redis-key
+                            registry-name
                             {:page page})
              :anti-forgery-field (anti-forgery-field)))))
 
@@ -40,19 +40,16 @@
         (found "/queues"))
 
   (GET "/in-flight" request
-       (render-registry-page request "registries/in_flight.html"
-                             (queue/in-flight-key (:farmhand.ui/context request))))
+       (render-registry-page request "registries/in_flight.html" queue/in-flight-registry))
 
   (GET "/completed" request
-       (render-registry-page request "registries/completed.html"
-                             (queue/completed-key (:farmhand.ui/context request))))
+       (render-registry-page request "registries/completed.html" queue/completed-registry))
 
   (GET "/failed" request
-       (render-registry-page request "registries/failed.html"
-                             (queue/dead-letter-key (:farmhand.ui/context request))))
+       (render-registry-page request "registries/failed.html" queue/dead-letter-registry))
 
   (GET "/jobs/:job-id" [job-id :as request]
-       (let [job (jobs/fetch-body (:farmhand.ui/context request) job-id)]
+       (let [job (jobs/fetch (:farmhand.ui/context request) job-id)]
          (layout/render-200
            "job_details.html"
            {:job job

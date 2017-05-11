@@ -19,7 +19,7 @@
     <td>{{ item.job.queue }}</td>
     <td>{{ item.job.fn-path }}</td>
     <td>{{ item.job.created-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
-    <td>{{ item.job.completed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
+    <td>{{ item.job.stopped-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
   </tr>
   {% endfor %}
 </table>

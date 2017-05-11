@@ -27,13 +27,13 @@
 {% ifequal job.status "complete" %}
 <div class="row">
   <div class="col-2"><strong>Completed</strong></div>
-  <div class="col-10">{{ job.completed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</div>
+  <div class="col-10">{{ job.stopped-at|date:"yyyy-MM-dd HH:mm:ss z" }}</div>
 </div>
 {% endifequal %}
 {% ifequal job.status "failed" %}
 <div class="row">
   <div class="col-2"><strong>Last Failure</strong></div>
-  <div class="col-10">{{ job.failed-at|date:"yyyy-MM-dd HH:mm:ss z" }}</div>
+  <div class="col-10">{{ job.stopped-at|date:"yyyy-MM-dd HH:mm:ss z" }}</div>
 </div>
 <div class="row">
   <div class="col-2"><strong>Failure Reason</strong></div>
