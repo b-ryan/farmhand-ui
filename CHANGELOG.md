@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.3.0-SNAPSHOT
+
+- Upgrade to work with Farmhand 0.9.0
+- New page to show scheduled jobs
+- Removed several barriers to using this as a library. Previously this project
+  was designed to be used as a standalone process. But now the recommended
+  procedure will be to embed it.
+
 ## 0.2.2
 
 - Fix several issues with using the UI as a dependency to another project.

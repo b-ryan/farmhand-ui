@@ -1,4 +1,4 @@
-(defproject com.buckryan/farmhand-ui "0.2.3-SNAPSHOT"
+(defproject com.buckryan/farmhand-ui "0.3.0-SNAPSHOT"
   :description "Farmhand web interface"
   :url "https://github.com/b-ryan/farmhand-ui"
   :deploy-repositories [["releases" :clojars]
