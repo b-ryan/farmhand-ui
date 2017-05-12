@@ -12,6 +12,8 @@ be re-queued right from the UI.
 
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Jetty](#jetty)
+  - [HTTP Kit](#http-kit)
 - [Screenshot](#screenshot)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
