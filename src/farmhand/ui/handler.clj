@@ -1,7 +1,6 @@
 (ns farmhand.ui.handler
   (:require [clojure.tools.logging :as log]
             [farmhand.core :as farmhand]
-            [farmhand.ui.config :as config]
             [farmhand.ui.layout :refer [error-page]]
             [farmhand.ui.routes :refer [routes]]
             [farmhand.utils :refer [fatal?]]

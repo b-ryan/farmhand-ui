@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.3.0-SNAPSHOT
+## 0.3.0
 
 - Upgrade to work with Farmhand 0.9.0
 - New page to show scheduled jobs
