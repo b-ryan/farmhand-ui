@@ -1,10 +1,10 @@
 # Farmhand UI
 
 The UI companion to [Farmhand](https://github.com/b-ryan/farmhand). Farmhand UI
-is a web interface that shows you lists of pending, completed, and failed jobs.
-You can use it to get details of a job, including when it was queued, the
-results of the job, or why it failed. In addition, failed jobs can be re-queued
-right from the UI.
+is a web interface that shows you lists of pending, scheduled, completed, and
+failed jobs. You can use it to get details of a job, including when it was
+queued, the results of the job, or why it failed. In addition, failed jobs can
+be re-queued right from the UI.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -18,15 +18,10 @@ right from the UI.
 
 ## Installation
 
-Download the latest release
-[here](https://github.com/b-ryan/farmhand-ui/releases/download/0.2.1/farmhand-ui-0.2.1-standalone.jar).
-
-## Usage
-
-Once you have downloaded the latest jar, run it with
+Leiningen:
 
 ```
-java jar farmhand-ui-0.2.1-standalone.jar
+[com.buckryan/farmhand-ui "0.2.3-SNAPSHOT"]
 ```
 
 ## Screenshot

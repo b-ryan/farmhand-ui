@@ -9,17 +9,8 @@
 ;; project that also sets its own selmer path
 (def custom-resource-path (clojure.java.io/resource "farmhand-ui/templates/"))
 
-(defn- missing-value-fn
-  [tag context-map]
-  (throw (ex-info "tag is missing" {:tag tag})))
-
-;; FIXME these should not be global settings - figure out how to not conflict
-;; with projects that use this repo as a dependency
-(parser/cache-off!)
-(selmer.util/set-missing-value-formatter! missing-value-fn :filter-missing-values true)
-
 (filters/add-filter!
-  :subs ;; FIXME namespace this?
+  :farmhand/subs
   (fn
     ([s start] (subs s (parse-long start)))
     ([s start end] (subs s (parse-long start) (parse-long end)))))
@@ -53,3 +44,10 @@
   {:status  (:status error-details)
    :headers {"Content-Type" "text/html; charset=utf-8"}
    :body    (render "error.html" error-details)})
+
+(defn found
+  "Returns a 302 redirection to the given URL."
+  [url]
+  {:status 302
+   :headers {"Location" url}
+   :body ""})

@@ -7,7 +7,7 @@
     <th>Queue</th>
     <th>Function</th>
     <th>Created</th>
-    <th>Completed</th>
+    <th>Will Run At</th>
   </tr>
   {% for item in items %}
   <tr>
@@ -19,7 +19,7 @@
     <td>{{ item.job.queue }}</td>
     <td>{{ item.job.fn-path }}</td>
     <td>{{ item.job.created-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
-    <td>{{ item.job.stopped-at|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
+    <td>{{ item.expiration|date:"yyyy-MM-dd HH:mm:ss z" }}</td>
   </tr>
   {% endfor %}
 </table>

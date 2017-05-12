@@ -8,14 +8,6 @@
             [farmhand.ui.layout :as layout :refer [error-page]]
             [ring.util.anti-forgery :refer [anti-forgery-field]]))
 
-(def ^:private ^Integer page-size 25)
-
-(defn found
-  [url]
-  {:status 302
-   :headers {"Location" url}
-   :body ""})
-
 (defn- render-registry-page
   [request template registry-name]
   (layout/render-200
@@ -27,7 +19,7 @@
              :anti-forgery-field (anti-forgery-field)))))
 
 (defroutes routes
-  (GET "/" [] (found "/queues"))
+  (GET "/" [] (layout/found "/queues"))
 
   (GET "/queues" request
        (layout/render-200
@@ -37,10 +29,13 @@
 
   (POST "/queues/:queue-name/purge" [queue-name :as request]
         (queue/purge (:farmhand.ui/context request) queue-name)
-        (found "/queues"))
+        (layout/found "/queues"))
 
   (GET "/in-flight" request
        (render-registry-page request "registries/in_flight.html" queue/in-flight-registry))
+
+  (GET "/scheduled" request
+       (render-registry-page request "registries/scheduled.html" queue/scheduled-registry))
 
   (GET "/completed" request
        (render-registry-page request "registries/completed.html" queue/completed-registry))
@@ -57,7 +52,7 @@
 
   (POST "/jobs/:job-id/requeue" [job-id :as request]
         (queue/requeue (:farmhand.ui/context request) job-id)
-        (found (str "/jobs/" job-id)))
+        (layout/found (str "/jobs/" job-id)))
 
   (route/not-found
     (:body
