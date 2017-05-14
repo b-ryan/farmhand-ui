@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.3.1
+
+- Depend on farmhand 0.9.1
+
 ## 0.3.0
 
 - Upgrade to work with Farmhand 0.9.0

@@ -23,7 +23,7 @@ be re-queued right from the UI.
 Leiningen:
 
 ```
-[com.buckryan/farmhand-ui "0.3.0"]
+[com.buckryan/farmhand-ui "0.3.1"]
 ```
 
 ## Usage
