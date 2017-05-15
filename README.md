@@ -22,7 +22,7 @@ be re-queued right from the UI.
 
 Leiningen:
 
-```
+```clojure
 [com.buckryan/farmhand-ui "0.3.1"]
 ```
 
