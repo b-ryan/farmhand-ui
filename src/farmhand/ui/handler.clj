@@ -2,7 +2,7 @@
   (:require [clojure.tools.logging :as log]
             [farmhand.core :as farmhand]
             [farmhand.ui.layout :refer [error-page]]
-            [farmhand.ui.routes :refer [routes]]
+            [farmhand.ui.routes :refer [endpoints]]
             [farmhand.utils :refer [fatal?]]
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
@@ -44,9 +44,9 @@
 (defn app
   "Creates an app that can serve farmhand UI routes.
 
-  It accepts one optional argument: a Farmhand context. If one is not given, it
-  will first try to use any existing context in the farmhand.core/context* atom
+  It accepts two optional arguments: a Farmhand context and an endpoint prefix.
+  If the context is not given, it will first try to use any existing context in the farmhand.core/context* atom
   and if there is none, it will create one with all the default options."
   ([] (app (or @farmhand/context* (farmhand/create-context))))
-  ([context]
-   (wrap-base #'routes context)))
+  ([context] (app context "/"))
+  ([context routes-prefix] (wrap-base (endpoints routes-prefix) context)))

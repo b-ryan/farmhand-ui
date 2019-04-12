@@ -11,7 +11,7 @@
                  [ring/ring-defaults "0.2.3"]
                  [selmer "1.10.6"]]
   :target-path "target/%s"
-  :jvm-opts ["-server" "-Duser.timezone=GMT"]
+  :jvm-opts ["-server" "-Duser.timezone=GMT" "--add-modules" "java.xml.bind"]
   :profiles {:dev {:dependencies [[http-kit "2.2.0"]
                                   [log4j "1.2.17"]
                                   [ring/ring-mock "0.3.0"]]

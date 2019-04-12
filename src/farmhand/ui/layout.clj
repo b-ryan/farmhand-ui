@@ -45,7 +45,8 @@
    :headers {"Content-Type" "text/html; charset=utf-8"}
    :body    (render "error.html" error-details)})
 
-(defn found
+(defn
+  found
   "Returns a 302 redirection to the given URL."
   [url]
   {:status 302
