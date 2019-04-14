@@ -14,23 +14,23 @@
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="/">Farmhand</a>
+      <a class="navbar-brand" href="{{prefix}}">Farmhand</a>
       <div class="collapse navbar-collapse" id="collapsing-navbar">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item {% ifequal page "queues.html" %}active{%endifequal%}">
-            <a href="queues" class="nav-link">Queues</a>
+            <a href="{{prefix}}/queues" class="nav-link">Queues</a>
           </li>
           <li class="nav-item {% ifequal page "registries/in_flight.html" %}active{%endifequal%}">
-            <a href="in-flight" class="nav-link">In Progress</a>
+            <a href="{{prefix}}/in-flight" class="nav-link">In Progress</a>
           </li>
           <li class="nav-item {% ifequal page "registries/scheduled.html" %}active{%endifequal%}">
-            <a href="scheduled" class="nav-link">Scheduled</a>
+            <a href="{{prefix}}/scheduled" class="nav-link">Scheduled</a>
           </li>
           <li class="nav-item {% ifequal page "registries/completed.html" %}active{%endifequal%}">
-            <a href="completed" class="nav-link">Completed</a>
+            <a href="{{prefix}}/completed" class="nav-link">Completed</a>
           </li>
           <li class="nav-item {% ifequal page "registries/failed.html" %}active{%endifequal%}">
-            <a href="failed" class="nav-link">Failed</a>
+            <a href="{{prefix}}/failed" class="nav-link">Failed</a>
           </li>
         </ul>
       </div>

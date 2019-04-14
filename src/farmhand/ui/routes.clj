@@ -10,17 +10,25 @@
             [clojure.string :refer [replace]]))
 
 (defn- render-registry-page
-  [request template registry-name]
+  [request template registry-name prefix]
   (layout/render-200
     template
     (let [page (as-int (get-in request [:query-params "page"]))]
       (assoc (registry/page (:farmhand.ui/context request)
                             registry-name
                             {:page page})
+             :prefix prefix
              :anti-forgery-field (anti-forgery-field)))))
 
+(defn- normalize-prefix [prefix]
+  (let [prefix (or prefix "/")]
+    (if (= (first prefix) \/)
+      prefix
+      (str "/" prefix))))
+
 (defn endpoints [prefix]
-  (let [redirect #(layout/found (replace (str prefix %) #"//" "/"))]
+  (let [prefix (normalize-prefix prefix)
+        redirect #(layout/found (replace (str prefix %) #"//" "/"))]
 
     (routes
       (context prefix []
@@ -32,6 +40,7 @@
              (layout/render-200
                "queues.html"
                {:queues (queue/describe-queues (:farmhand.ui/context request))
+                :prefix prefix
                 :anti-forgery-field (anti-forgery-field)}))
 
         (POST "/queues/:queue-name/purge" [queue-name :as request]
@@ -39,22 +48,23 @@
               (redirect "/queues"))
 
         (GET "/in-flight" request
-             (render-registry-page request "registries/in_flight.html" queue/in-flight-registry))
+             (render-registry-page request "registries/in_flight.html" queue/in-flight-registry prefix))
 
         (GET "/scheduled" request
-             (render-registry-page request "registries/scheduled.html" queue/scheduled-registry))
+             (render-registry-page request "registries/scheduled.html" queue/scheduled-registry prefix))
 
         (GET "/completed" request
-             (render-registry-page request "registries/completed.html" queue/completed-registry))
+             (render-registry-page request "registries/completed.html" queue/completed-registry prefix))
 
         (GET "/failed" request
-             (render-registry-page request "registries/failed.html" queue/dead-letter-registry))
+             (render-registry-page request "registries/failed.html" queue/dead-letter-registry prefix))
 
         (GET "/jobs/:job-id" [job-id :as request]
              (let [job (jobs/fetch (:farmhand.ui/context request) job-id)]
                (layout/render-200
                  "job_details.html"
                  {:job job
+                  :prefix prefix
                   :anti-forgery-field (anti-forgery-field)})))
 
         (POST "/jobs/:job-id/requeue" [job-id :as request]
