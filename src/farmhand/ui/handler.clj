@@ -48,5 +48,5 @@
   If the context is not given, it will first try to use any existing context in the farmhand.core/context* atom
   and if there is none, it will create one with all the default options."
   ([] (app (or @farmhand/context* (farmhand/create-context))))
-  ([context] (app context "/"))
+  ([context] (app context ""))
   ([context routes-prefix] (wrap-base (endpoints routes-prefix) context)))

@@ -1,4 +1,4 @@
-<form action="/jobs/{{ job-id }}/requeue" method="post">
+<form action="{{prefix}}/jobs/{{ job-id }}/requeue" method="post">
   {{ anti-forgery-field|safe }}
   <button class="btn {{ btn-size|default:"" }}">Requeue</button>
 </form>
