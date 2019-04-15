@@ -12,7 +12,7 @@
   {% for item in items %}
   <tr>
     <td>
-      <a href="/jobs/{{ item.job.job-id}}">
+      <a href="{{prefix}}/jobs/{{ item.job.job-id}}">
         <span title="{{ item.job.job-id }}">{{ item.job.job-id|farmhand/subs:0:6 }}...</span>
       </a>
     </td>
