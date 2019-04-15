@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% include "components/paging_nav.html" %}
+
 <table class="table">
   <tr>
     <th>ID</th>
@@ -13,7 +14,7 @@
   <tr>
     <td>
       <a href="{{prefix}}/jobs/{{ item.job.job-id}}">
-        <span title="{{ item.job.job-id }}">{{ item.job.job-id|farmhand/subs:0:6 }}...</span>
+        <span title="{{ item.job.job-id }}">{{ item.job.job-id| farmhand/subs:0:6 }}...</span>
       </a>
     </td>
     <td>{{ item.job.queue }}</td>
